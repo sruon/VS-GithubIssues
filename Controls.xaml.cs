@@ -18,9 +18,6 @@ using Octokit;
 
 namespace sruon.GithubIssues
 {
-    /// <summary>
-    /// Interaction logic for MyControl.xaml
-    /// </summary>
     public partial class Controls : UserControl
     {
         public Window _parent;
