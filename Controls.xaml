@@ -6,15 +6,34 @@
              Background="{DynamicResource VsBrush.Window}"
              Foreground="{DynamicResource VsBrush.WindowText}"
              mc:Ignorable="d"
-             d:DesignHeight="300" d:DesignWidth="300"
-             Name="MyToolWindow">
-    <Grid>
-        <StackPanel Orientation="Vertical">
+             Name="MyToolWindow" Height="330.634" Width="296.831">
+    <Grid Margin="0,0,10,0">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0*"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="143.662"/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Vertical" Margin="0,0,0,-55" Grid.RowSpan="2" Grid.ColumnSpan="2" RenderTransformOrigin="0.5,0.5">
+            <StackPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </StackPanel.RenderTransform>
             <ToolBar>
                 <Button x:Name="refreshBtn" Content="Refresh" VerticalAlignment="Stretch" Width="75" Click="refreshBtn_Click"/>
-                <Button Content="Setup" Height="22" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
             </ToolBar>
             <TreeView x:Name="issuesTree" Height="272"/>
+            <ToolBar Height="30">
+                <TextBox Height="25" Margin="0" TextWrapping="Wrap" Text="Title" VerticalAlignment="Top" Width="188"/>
+                <Button Content="New issue" Height="25" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
+            </ToolBar>
         </StackPanel>
     </Grid>
 </UserControl>

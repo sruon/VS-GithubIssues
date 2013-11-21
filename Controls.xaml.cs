@@ -36,27 +36,47 @@ namespace sruon.GithubIssues
         private async void refreshBtn_Click(object sender, RoutedEventArgs e)
         {
             Options options = getOptions();
+            GitHubClient client;
             if (options.Username != null && options.Password != null)
             {
-                GitHubClient client = new GitHubClient(new ProductHeaderValue("gh-issues", "1.0"))
+                client = new GitHubClient(new ProductHeaderValue("gh-issues", "1.0"))
                 {
                     Credentials = new Credentials(options.Username, options.Password)
                 };
             }
             else
             {
-                GitHubClient client = new GitHubClient(new ProductHeaderValue("gh-issues", "1.0"));
+                client = new GitHubClient(new ProductHeaderValue("gh-issues", "1.0"));
             }
 
             var issues = await client.Issue.GetForRepository(options.User, options.Repo);
             issuesTree.Items.Clear();
             foreach (var issue in issues)
                 {
-                    var item = new TreeViewItem() {Header = issue.Title};
+                    var item = new TreeViewItem() { Header = issue.Number.ToString() + " - " + issue.Title };
                     issuesTree.Items.Add(item);
-                    var subItem = new TreeViewItem() {Header = issue.Body };
+                if (issue.Body != null)
+                {
+                    var subItem = new TreeViewItem() {Header = "[" + issue.User.Login + "] " + issue.Body };
                     item.Items.Add(subItem);
                 }
+                var comments = await client.Issue.Comment.GetForIssue(options.User, options.Repo, issue.Number);
+                    foreach (var comment in comments)
+                    {
+                        var subItem = new TreeViewItem() { Header = "[" + comment.User.Login + "] " + comment.Body };
+                        item.Items.Add(subItem);
+                    }
+                }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

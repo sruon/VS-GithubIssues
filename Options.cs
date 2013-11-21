@@ -22,7 +22,7 @@ namespace sruon.GithubIssues
             set { username = value; }
         }
 
-        public SecureString Password
+        public string Password
         {
             get { return password; }
             set { password = value; }
