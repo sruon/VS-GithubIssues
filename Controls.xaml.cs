@@ -49,6 +49,8 @@ namespace sruon.GithubIssues
                 client = new GitHubClient(new ProductHeaderValue("gh-issues", "1.0"));
             }
 
+            if (options.User == null || options.Repo == null)
+                return;
             var issues = await client.Issue.GetForRepository(options.User, options.Repo);
             issuesTree.Items.Clear();
             foreach (var issue in issues)
